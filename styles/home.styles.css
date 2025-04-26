@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
+
+header {
+    height: 75px;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    justify-content: space-between;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+}
+
+.header-container img {
+    height: 60px;
+}
+
+.header-container h1 {
+    font-family: 'Berkshire Swash', sans-serif;
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+.active {
+    font-weight: bold;
+    color: #007BFF;
+}
