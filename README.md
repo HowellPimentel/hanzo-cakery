@@ -7,7 +7,6 @@ Welcome to **Hanzo's Cakery**, an online platform where you can browse, order, a
 - **PHP**: Server-side scripting language to manage business logic and data processing.
 - **MySQL**: Database to store user information, orders, products, and more.
 - **HTML, CSS, JavaScript**: Front-end technologies to ensure a smooth and interactive user experience.
-- **Bootstrap**: For responsive and modern UI design.
 - **AJAX**: For smooth asynchronous interactions between the client and server.
 - **Apache**: Web server for hosting the application.
 
