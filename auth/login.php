@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../assets/Logo.png">
     <link rel="stylesheet" href="../styles/styles.css">
-    <link rel="stylesheet" href="../styles/auth.styles.css">
+    <link rel="stylesheet" href="../styles/auth.css">
     <title>Hanzo Cakery | Login</title>
 </head>
 <body>
     <div class="container">
-        <div class="logo">
-            <img src="../assets/Logo.svg" alt="">
-        </div>
         <div class="form-container">
+            <div class="logo">
+                <img src="../assets/icon/Logo.svg" alt="">
+            </div>
             <h1>Log in</h1>
             <p>Log in to place your next delicious order</p>
             <form action="" method="POST">
