@@ -18,7 +18,7 @@
             <p>Sign up to satisfy your sweet tooth anytime</p>
             <form action="" method="POST">
                 <input type="text" placeholder="First Name">
-                <input type="text" placeholder="Last Name">
+                <input type="text" placeholder="Last Name"GIT >
                 <input type="text" placeholder="Contact Number">
                 <input type="text" placeholder="Username">
                 <input type="password" placeholder="Password">

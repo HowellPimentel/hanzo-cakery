@@ -45,6 +45,20 @@
                                 </svg>
                             </a>
                         </li>
+                        <?php if (!isset($_COOKIE['token'])): ?>
+                            <div class="auth-button">
+                                <li>
+                                    <a href="../auth/login.php">
+                                        Log in
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../auth/signup.php">
+                                        Sign up
+                                    </a>
+                                </li>
+                            </div>
+                        <?php endif; ?>
                     </ul>
                 </nav>
             </div>
