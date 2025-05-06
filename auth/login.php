@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (isset($_COOKIE['token'])) {
+    header("Location: ../home/home.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,6 +27,20 @@
             </div>
             <h1>Log in</h1>
             <p>Log in to place your next delicious order</p>
+            <?php if (isset($_SESSION['success'])): ?>
+                <div class="message-success">
+                    <p><?= $_SESSION['success'] ?></p>
+                    <?php unset($_SESSION['success']) ?>
+                </div>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['error'])): ?>
+                <div class="message-error">
+                    <p>
+                    <p><?= $_SESSION['error'] ?></p>
+                    <?php unset($_SESSION['error']) ?>
+                    </p>
+                </div>
+            <?php endif; ?>
             <form action="login_validate.php" method="POST">
                 <input type="text" placeholder="Username" name="username">
                 <input type="password" placeholder="Password" name="password">

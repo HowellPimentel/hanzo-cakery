@@ -58,6 +58,12 @@
                                     </a>
                                 </li>
                             </div>
+                        <?php else: ?>
+                            <li>
+                                <a href="../auth/logout.php">
+                                    Logout
+                                </a>
+                            </li>
                         <?php endif; ?>
                     </ul>
                 </nav>

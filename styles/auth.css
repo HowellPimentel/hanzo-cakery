@@ -7,8 +7,9 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100%;   
+    height: 100%;
 }
+
 .logo {
     display: flex;
     justify-content: center;
@@ -30,6 +31,7 @@ body {
     flex-direction: column;
     justify-content: center;
 }
+
 .form-container h1 {
     margin-top: 1rem;
     font-size: 2rem;
@@ -45,7 +47,7 @@ body {
 
 .form-container a {
     text-decoration: none;
-    color: #1f8beb; 
+    color: #1f8beb;
     font-weight: 600;
 }
 
@@ -59,7 +61,8 @@ form input {
     margin-bottom: 0.75rem;
 }
 
-form button, form input {
+form button,
+form input {
     padding: 0.75rem;
     border-radius: 0.5rem;
     border: none;
@@ -71,4 +74,40 @@ form button {
     font-weight: 600;
     margin-top: 1rem;
     font-weight: 800;
+}
+
+.name-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.name-group input {
+    width: 100%;
+}
+
+.message-success {
+    border: 1px solid #00D621;
+    color: #00D621;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    background: hsl(150, 100%, 95%)
+}
+
+.message-error {
+    border: 1px solid #FF6961;
+    color: #FF6961;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    background: hsl(0, 100%, 95%);
+}
+
+.message-success p,
+.message-error p {
+    margin: auto;
+    font-size: 0.9rem;
+    font-weight: bold;
 }
