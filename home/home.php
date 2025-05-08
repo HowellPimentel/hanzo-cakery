@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+require_once '../includes/db.php';
+
+$stmt = $pdo->prepare("SELECT * FROM cakes");
+$stmt->execute();
+$cakes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -106,34 +117,35 @@
                 <a href="#">View All Cakes</a>
             </div>
             <div class="cake-container">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="../assets/cakes/r5.png" alt="Chocolate Bento Cake">
-                    </div>
-                    <div class="card-cake">
-                        <h3>Chocolate Bento</h3>
-                        <p>&#8369; 399.00</p>
-                        <div class="description">Rich chocolate cake with premium cocoa and creamy frosting.</div>
-                    </div>
-                    <div class="card-btn">
-                        <button class="add-cart">Add to Cart</button>
-                        <button class="buy-now">Buy now</button>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-image">
-                        <img src="../assets/cakes/r7.png" alt="Chocolate Bento Cake">
-                    </div>
-                    <div class="card-cake">
-                        <h3>Mango Graham Cake</h3>
-                        <p>&#8369; 399.00</p>
-                        <div class="description">Rich chocolate cake with premium cocoa and creamy frosting.</div>
-                    </div>
-                    <div class="card-btn">
-                        <button class="add-cart">Add to Cart</button>
-                        <button class="buy-now">Buy now</button>
-                    </div>
-                </div>
+                <?php
+                $categories = ['Cake in a Tub', 'Bento', 'Cake', 'Cake in a Tub'];
+                $displayedCakes = [];
+
+                foreach ($categories as $category) {
+                    foreach ($cakes as $cake) {
+                        if ($cake['cake_type'] === $category && !in_array($cake, $displayedCakes)) {
+                            $displayedCakes[] = $cake;
+                ?>
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="../assets/cakes/<?= $cake['image'] ?>" alt="<?= $cake['cake_name'] ?>">
+                                </div>
+                                <div class="card-cake">
+                                    <h3><?= $cake['cake_name'] ?></h3>
+                                    <p>&#8369; <?= number_format($cake['cake_price'], 2) ?></p>
+                                    <div class="description"><?= $cake['cake_description'] ?></div>
+                                </div>
+                                <div class="card-btn">
+                                    <button class="add-cart">Add to Cart</button>
+                                    <button class="buy-now">Buy now</button>
+                                </div>
+                            </div>
+                <?php
+                            break; // Stop after finding one cake for the category
+                        }
+                    }
+                }
+                ?>
             </div>
         </div>
 
