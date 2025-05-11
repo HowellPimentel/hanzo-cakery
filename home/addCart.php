@@ -23,8 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cake = $_POST['cake_id'];
     $user = $decoded->data->user_id;
 
-    $stmt = $pdo->prepare("SELECT * FROM cart WHERE cake_id = ?");
-    $stmt->execute([$$cake]);
+    $stmt = $pdo->prepare("SELECT * FROM cart WHERE cake_id = ? and user_id = ?");
+    $stmt->execute([$cake, $user]);
     $exist = $stmt->fetch(PDO::FETCH_ASSOC);
     $quantity = $exist["quantity"];
 
@@ -32,13 +32,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare("UPDATE cart SET quantity = ? WHERE user_id = ? and cake_id = ?");
         $stmt->execute([$quantity + 1, $user, $cake]);
         $_SESSION['success'] = "Cake added to cart successfully!";
-        header("Location: home.php");
+        header("Location: " . $_SERVER['HTTP_REFERER']);
         exit();
     } else {
         $stmt = $pdo->prepare("INSERT INTO cart(cake_id, user_id, quantity) VALUES (?, ?, ?)");
         $stmt->execute([$cake, $user, 1]);
         $_SESSION['success'] = "Cake added to cart successfully!";
-        header("Location: home.php");
+        header("Location: " . $_SERVER['HTTP_REFERER']);
         exit();
     }
 

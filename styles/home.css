@@ -843,6 +843,7 @@ footer {
     border-radius: 1rem;
     font-weight: bold;
     margin-top: 1rem;
+    cursor: pointer;
     transition: var(--transition);
 }
 
