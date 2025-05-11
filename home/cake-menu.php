@@ -16,7 +16,6 @@ $cakes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../assets/icon/Circle_Logo.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../styles/home.css">
     <link rel="stylesheet" href="../styles/styles.css">
     <title>Hanzo's Cakery</title>
@@ -54,7 +53,7 @@ $cakes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <nav class='navlink'>
                         <ul>
                             <li>
-                                <a href="cart.php" aria-label="Shopping Cart">
+                                <a href="#" aria-label="Shopping Cart">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                         <path
                                             d="M22.713,4.077A2.993,2.993,0,0,0,20.41,3H4.242L4.2,2.649A3,3,0,0,0,1.222,0H1A1,1,0,0,0,1,2h.222a1,1,0,0,1,.993.883l1.376,11.7A5,5,0,0,0,8.557,19H19a1,1,0,0,0,0-2H8.557a3,3,0,0,1-2.82-2h11.92a5,5,0,0,0,4.921-4.113l.785-4.354A2.994,2.994,0,0,0,22.713,4.077ZM21.4,6.178l-.786,4.354A3,3,0,0,1,17.657,13H5.419L4.478,5H20.41A1,1,0,0,1,21.4,6.178Z" />
@@ -79,11 +78,11 @@ $cakes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <nav class="nav-container">
             <ul>
-                <li class="active">
-                    <a href="#">Home</a>
-                </li>
                 <li>
-                    <a href="cake-menu.php">Cake Menu</a>
+                    <a href="home.php">Home</a>
+                </li>
+                <li class="active">
+                    <a href="#">Cake Menu</a>
                 </li>
                 <li>
                     <a href="#">About Us</a>
@@ -109,22 +108,9 @@ $cakes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php endif; ?>
     </header>
     <main>
-        <div class="hero-section">
-            <div class="hero-content">
-                <h2>Delicious Cakes for Every Occasion</h2>
-                <p>Handcrafted with love using premium ingredients for unforgettable moments</p>
-                <a href="#" class="hero-btn">Order Now</a>
-            </div>
-        </div>
-
-        <div class="quote">
-            <p>Bite into joy, one slice at a time</p>
-        </div>
-
         <div class="cake-section">
             <div class="cake-header">
                 <h1>Our Popular Cakes</h1>
-                <a href="#">View All Cakes</a>
             </div>
             <div class="cake-container">
                 <?php
@@ -164,40 +150,101 @@ $cakes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 ?>
             </div>
         </div>
-        <section class="map-section">
-            <div class="container">
-                <div class="map-container">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d493.68410964213484!2d125.12965904982917!3d8.155018769891907!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32ffab5160410f33%3A0xd56d32abee17670c!2sHanzo&#39;s%20cakery!5e0!3m2!1sen!2sph!4v1746951881893!5m2!1sen!2sph" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-                <div style="text-align: center; margin-top: 20px; text-decoration: underline; font-weight: bold; text-underline-offset: 0.5rem; color: var(--primary);">
-                    <a href="https://maps.app.goo.gl/NafYD9kygfWXcUS58" target="_blank" class="btn btn-primary">See Directions</a>
-                </div>
+        <div class="cake-section">
+            <div class="cake-header">
+                <h1>Cake in a Tub</h1>
             </div>
-        </section>
-    </main>
-    <footer>
-        <div class="footer-container">
-            <div class="footer-col">
-                <img src="../assets/icon/Circle_Logo.png" alt="">
-                <h3>Hanzo's Cakery</h3>
-                <p>&copy; All rights reserved. Hanzo's Cakery 2025</p>
-            </div>
-            <div class="footer-col">
-                <div class="info">
-                    <ul>
-                        <li><i class="fa fa-envelope" aria-hidden="true"></i> hanzoscakery@gmail.com</li>
-                        <li><i class="fa fa-phone" aria-hidden="true"></i> 0975 171 5127</li>
-                        <li><i class="fa-brands fa-facebook-f"></i> Hanzo's Cakery</li>
-                    </ul>
-                </div>
-                <div class="social-links">
-                    <a href="https://www.facebook.com/profile.php?id=100085643388007" target="_blank">
-                        <i class="fa-brands fa-facebook-f"></i>
-                    </a>
-                </div>
+            <div class="cake-container">
+                <?php foreach ($cakes as $cake): ?>
+                    <?php if ($cake['cake_type'] === "Cake in a Tub"): ?>
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="../assets/cakes/<?= $cake['image_path'] ?>" alt="<?= $cake['cake_name'] ?>">
+                            </div>
+                            <div class="card-cake">
+                                <h3><?= $cake['cake_name'] ?></h3>
+                                <p>&#8369; <?= number_format($cake['cake_price'], 2) ?></p>
+                                <div class="description"><?= $cake['cake_description'] ?></div>
+                            </div>
+                            <div class="card-btn">
+                                <form action="addCart.php" method="POST">
+                                    <input type="hidden" value="<?= $cake['id'] ?>" name="cake_id">
+                                    <button class="add-cart" type="submit">Add to Cart</button>
+                                </form>
+                                <form action="" method="POST">
+                                    <input type="hidden" value="<?= $cake['id'] ?>" name="cake_id">
+                                    <button class="buy-now">Buy now</button>
+                                </form>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
             </div>
         </div>
-    </footer>
+        <div class="cake-section">
+            <div class="cake-header">
+                <h1>Bento</h1>
+            </div>
+            <div class="cake-container">
+                <?php foreach ($cakes as $cake): ?>
+                    <?php if ($cake['cake_type'] === "Bento"): ?>
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="../assets/cakes/<?= $cake['image_path'] ?>" alt="<?= $cake['cake_name'] ?>">
+                            </div>
+                            <div class="card-cake">
+                                <h3><?= $cake['cake_name'] ?></h3>
+                                <p>&#8369; <?= number_format($cake['cake_price'], 2) ?></p>
+                                <div class="description"><?= $cake['cake_description'] ?></div>
+                            </div>
+                            <div class="card-btn">
+                                <form action="addCart.php" method="POST">
+                                    <input type="hidden" value="<?= $cake['id'] ?>" name="cake_id">
+                                    <button class="add-cart" type="submit">Add to Cart</button>
+                                </form>
+                                <form action="" method="POST">
+                                    <input type="hidden" value="<?= $cake['id'] ?>" name="cake_id">
+                                    <button class="buy-now">Buy now</button>
+                                </form>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <div class="cake-section">
+            <div class="cake-header">
+                <h1>Cake</h1>
+            </div>
+            <div class="cake-container">
+                <?php foreach ($cakes as $cake): ?>
+                    <?php if ($cake['cake_type'] === "Cake"): ?>
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="../assets/cakes/<?= $cake['image_path'] ?>" alt="<?= $cake['cake_name'] ?>">
+                            </div>
+                            <div class="card-cake">
+                                <h3><?= $cake['cake_name'] ?></h3>
+                                <p>&#8369; <?= number_format($cake['cake_price'], 2) ?></p>
+                                <div class="description"><?= $cake['cake_description'] ?></div>
+                            </div>
+                            <div class="card-btn">
+                                <form action="addCart.php" method="POST">
+                                    <input type="hidden" value="<?= $cake['id'] ?>" name="cake_id">
+                                    <button class="add-cart" type="submit">Add to Cart</button>
+                                </form>
+                                <form action="" method="POST">
+                                    <input type="hidden" value="<?= $cake['id'] ?>" name="cake_id">
+                                    <button class="buy-now">Buy now</button>
+                                </form>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        
+    </main>
 </body>
 
 </html>

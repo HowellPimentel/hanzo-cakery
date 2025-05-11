@@ -593,7 +593,7 @@ a {
 
 /* Footer */
 footer {
-    background-color: #333;
+    background-color: var(--primary);
     color: var(--white);
     padding: 4rem 5% 2rem;
 }
@@ -603,6 +603,10 @@ footer {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 3rem;
     margin-bottom: 3rem;
+}
+
+.footer-col img {
+    width: 150px;
 }
 
 .footer-col h3 {
@@ -623,20 +627,25 @@ footer {
     background-color: var(--secondary);
 }
 
-.footer-col ul {
+.info {
+    margin-bottom: 2rem;
+}
+
+.info ul {
     list-style: none;
 }
 
-.footer-col ul li {
+.info ul li {
     margin-bottom: 0.8rem;
-}
-
-.footer-col ul li a {
     color: #ccc;
     transition: var(--transition);
 }
 
-.footer-col ul li a:hover {
+.info ul li i  {
+    margin-right: 0.5rem;
+}
+
+.info ul li:hover {
     color: var(--white);
     padding-left: 5px;
 }
@@ -765,5 +774,34 @@ footer {
 }
 
 .auth-button li {
-    
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    color: var(--white);
+    transition: var(--transition);
+}
+
+.auth-button li:hover {
+    transform: translateY(-2px);
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.map-section {
+  padding: 50px 0;
+  background-color: #e6f7f7;
+}
+
+.map-container {
+  height: 400px;
+  background-color: #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+}
+
+.map-section > .container {
+    padding: 5rem;
 }

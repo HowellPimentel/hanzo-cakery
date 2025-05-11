@@ -29,16 +29,14 @@ if (isset($_COOKIE['token'])) {
             <p>Log in to place your next delicious order</p>
             <?php if (isset($_SESSION['success'])): ?>
                 <div class="message-success">
-                    <p><?= $_SESSION['success'] ?></p>
+                    <p class="success"><?= $_SESSION['success'] ?></p>
                     <?php unset($_SESSION['success']) ?>
                 </div>
             <?php endif; ?>
             <?php if (isset($_SESSION['error'])): ?>
                 <div class="message-error">
-                    <p>
-                    <p><?= $_SESSION['error'] ?></p>
+                    <p class="error"><?= $_SESSION['error'] ?></p>
                     <?php unset($_SESSION['error']) ?>
-                    </p>
                 </div>
             <?php endif; ?>
             <form action="login_validate.php" method="POST">

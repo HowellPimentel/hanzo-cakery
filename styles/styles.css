@@ -12,3 +12,32 @@ body {
     height: 100dvh;
     width: 100%;
 }
+
+.message-success {
+    border: 1px solid #00D621;
+    color: #00D621;
+    padding: 0.25rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    background: hsl(150, 100%, 95%);
+    display: flex;
+}
+
+.message-error {
+    border: 1px solid #FF6961;
+    color: #FF6961;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    background: hsl(0, 100%, 95%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.message-success .success,
+.message-error .error {
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-align: center;
+}
