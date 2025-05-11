@@ -169,8 +169,9 @@ $cakes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="map-container">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d493.68410964213484!2d125.12965904982917!3d8.155018769891907!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32ffab5160410f33%3A0xd56d32abee17670c!2sHanzo&#39;s%20cakery!5e0!3m2!1sen!2sph!4v1746951881893!5m2!1sen!2sph" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-                <div style="text-align: center; margin-top: 20px; text-decoration: underline; font-weight: bold; text-underline-offset: 0.5rem; color: var(--primary);">
-                    <a href="https://maps.app.goo.gl/NafYD9kygfWXcUS58" target="_blank" class="btn btn-primary">See Directions</a>
+                <div style="text-align: center;">
+                    <h1 style="color: var(--primary); margin-top: 1rem;">Hanzo's Cakery</h1>
+                    <p style="text-transform: capitalize;">murillo street, corner mampaalong street, Malaybalay, Philippines</p>
                 </div>
             </div>
         </section>

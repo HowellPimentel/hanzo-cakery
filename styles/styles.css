@@ -40,4 +40,6 @@ body {
     font-size: 0.75rem;
     font-weight: bold;
     text-align: center;
+    margin: auto;
+    margin-bottom: 0 !important;
 }
