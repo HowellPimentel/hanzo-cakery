@@ -78,6 +78,7 @@ $cakes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="cart-container">
             <?php if (!empty($cakes)): ?>
                 <div class="cart-content">
+                    <h2>Your Cart</h2>
                     <?php foreach ($cakes as $cake): ?>
                         <div class="cart-card">
                             <img src="../assets/cakes/<?= $cake['image_path'] ?>" alt="<?= $cake['cake_name'] ?>">
@@ -114,7 +115,53 @@ $cakes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         echo '₱ ' . number_format($total, 2);
                         ?>
                     </h3>
-                    <button>Place Order</button>
+                    <button>Place Order <i class="fa-solid fa-arrow-right" style="font-size: 1rem;"></i> </button>
+                </div>
+            </div>
+            <div class="details">
+                <div class="detail-container">
+                    <h2>Contact Details</h2>
+                    <div class="detail-group">
+                        <div class="left">
+                            <p class="label">Phone Number:</p>
+                            <p class="label">Name:</p>
+                            <p class="label">Email:</p>
+                        </div>
+                        <div class="right">
+                            <p><?= $cakes[0]['phone_number'] ?></p>
+                            <p><?= $cakes[0]['firstname'] . ' ' . $cakes[0]['lastname'] ?></p>
+                            <p><?= $cakes[0]['email'] ?></p>
+                        </div>
+                    </div>
+                    <div class="payment-method">
+                        <form action="">
+                            <div class="form-group">
+                                <label for="gcash"><img src="../assets//gcash.png" alt="" width="24"> GCash</label>
+                                <input type="radio" name="payment" id="gcash" value="gcash" checked>
+                            </div>
+                            <div class="form-group">
+                                <label for="bank"><i class="fa fa-bank"></i> Bank Transfer</label>
+                                <input type="radio" name="payment" id="bank" value="bank">
+                            </div>
+                        </form>
+                        <div class="payment-details">
+                            <h2>Account Details</h2>
+                            <form action="">
+                                <div class="payment-group">
+                                    <label for="">Account Name</label>
+                                    <input type="text">
+                                </div>
+                                <div class="payment-group">
+                                    <label for="">Account Number</label>
+                                    <input type="number">
+                                </div>
+                            </form>
+                            <p class="payment-note">
+                                <strong>Notice: </strong> <?= $cakes[0]['firstname'] ?>, please ensure your phone number and selected payment method are correct before submitting your order.
+                            </p>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -19,7 +19,7 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Roboto', sans-serif;
     color: var(--text-dark);
     background-color: var(--off-white);
     line-height: 1.6;
@@ -872,10 +872,15 @@ footer {
 .invoice-card button {
     padding: 0.75rem 1rem;
     background-color: var(--off-white);
-    font-weight: bold;
+    font-weight: 800;
+    color: #007BFF;
+    text-transform: uppercase;
     transition: var(--transition);
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
     border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     border: none;
 }
 
@@ -926,12 +931,111 @@ footer {
   border-right: 1px solid #e0e0e0;
   text-align: center;
   font-size: 14px;
-  -moz-appearance: textfield; /* Removes arrows in Firefox */
+}
+
+.detail-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 1rem;
+    position: fixed;
+    margin: 0 1rem;
+}
+
+.detail-container h2,
+.cart-content h2 {
+    text-transform: uppercase;
+    color: var(--primary);
+    font-weight: 800;
+}
+
+.detail-group {
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+.detail-group .label {
+    font-weight: 600;
+}
+
+.detail-group p:not(.label){
+    margin-left: auto;
+    margin-right: 0;
+    text-align: left;
+}
+
+.payment-method {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.payment-method form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    background: var(--off-white);
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.form-group label {
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    align-items: center;
+    cursor: pointer;
+}
+
+.payment-details > form {
+    margin-top: 0.5rem;
+}
+
+.payment-group {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.payment-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.payment-group input {
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid #00000080;
+    border-radius: 0.5rem;
+}
+
+.form-group:has(input:checked) {
+  border: 1px solid var(--primary);
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.payment-note {
+    background-color: var(--off-white);
+    border: 1px solid var(--primary);
+    padding: 10px;
+    border-radius: 5px;
+    color: var(--primary);
+    margin-top: 10px;
+    box-shadow: var(--shadow);
+    border-radius: 0.25rem;
+    font-size: 0.9rem;
 }
 
 /* Remove default number input arrows */
-.quantity-input::-webkit-outer-spin-button,
-.quantity-input::-webkit-inner-spin-button {
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }

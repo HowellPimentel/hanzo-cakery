@@ -124,7 +124,7 @@ $cakes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="cake-section">
             <div class="cake-header">
                 <h1>Our Popular Cakes</h1>
-                <a href="#">View All Cakes</a>
+                <a href="cake-menu.php">View All Cakes</a>
             </div>
             <div class="cake-container">
                 <?php
