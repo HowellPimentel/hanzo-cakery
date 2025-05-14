@@ -858,6 +858,7 @@ footer {
     left: 0;
     width: 100%;
     background-color: var(--primary);
+    z-index: 9999;
 }
 
 .invoice-card {
@@ -938,7 +939,8 @@ footer {
     flex-direction: column;
     gap: 1rem;
     padding: 0 1rem;
-    position: fixed;
+    position: sticky;
+    top: 5.9rem;
     margin: 0 1rem;
 }
 
@@ -990,6 +992,10 @@ footer {
     display: grid;
     grid-template-columns: 30px 1fr;
     align-items: center;
+    cursor: pointer;
+}
+
+.form-group input[type=radio] {
     cursor: pointer;
 }
 

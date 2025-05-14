@@ -21,7 +21,7 @@ try {
     // Update the cart quantity
     $stmt = $pdo->prepare("UPDATE cart SET quantity = ? WHERE user_id = ? AND cake_id = ?");
     $stmt->execute([$quantity, $user_id, $cake_id]);
-    
+
     // Calculate the new total price
     $stmt = $pdo->prepare("
         SELECT SUM(c.quantity * ck.cake_price) as total
@@ -31,7 +31,7 @@ try {
     ");
     $stmt->execute([$user_id]);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
     // Return success response with new total
     echo json_encode([
         'success' => true,

@@ -2,11 +2,42 @@
 session_start();
 
 require_once '../includes/db.php';
+require '../utils/load_env.php';
+require '../vendor/autoload.php';
+
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 $stmt = $pdo->prepare("SELECT * FROM cakes");
 $stmt->execute();
 $cakes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+if(isset($_COOKIE['token'])){
+    $token = $_COOKIE['token'];
+    $decoded = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $cake = $_POST['cake_id'];
+    $user = $decoded->data->user_id;
+
+    $stmt = $pdo->prepare("SELECT * FROM cart WHERE cake_id = ? and user_id = ?");
+    $stmt->execute([$cake, $user]);
+    $exist = $stmt->fetch(PDO::FETCH_ASSOC);
+    $quantity = $exist["quantity"];
+
+    if ($stmt->rowCount() > 0) {
+        $stmt = $pdo->prepare("UPDATE cart SET quantity = ? WHERE user_id = ? and cake_id = ?");
+        $stmt->execute([$quantity + 1, $user, $cake]);
+        header("Location: cart.php");
+        exit();
+    } else {
+        $stmt = $pdo->prepare("INSERT INTO cart(cake_id, user_id, quantity) VALUES (?, ?, ?)");
+        $stmt->execute([$cake, $user, 1]);
+        header("Location: cart.php");
+        exit();
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -83,12 +114,6 @@ $cakes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </li>
                 <li class="active">
                     <a href="#">Cake Menu</a>
-                </li>
-                <li>
-                    <a href="#">About Us</a>
-                </li>
-                <li>
-                    <a href="#">Contact Us</a>
                 </li>
             </ul>
         </nav>
