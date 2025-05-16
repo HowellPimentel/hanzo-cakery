@@ -15,10 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $phone = $_POST['phone_number'];
+    $address = $_POST['address'];
     $password = $_POST['password'];
     $confirm = $_POST['confirm_password'];
 
-    if (empty($firstname) || empty($lastname) || empty($username) || empty($email) || empty($phone) || empty($password)) {
+    if (empty($firstname) || empty($lastname) || empty($username) || empty($email) || empty($phone) || empty($address) || empty($password)) {
         $_SESSION['error'] = "All fields are required";
         header("Location: signup.php");
         exit();
@@ -50,8 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    $stmt = $pdo->prepare("INSERT INTO users(firstname, lastname, username, email, phone_number, password) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->execute([$firstname, $lastname, $username, $email, $phone, $hashedPassword]);
+    $stmt = $pdo->prepare("INSERT INTO users(firstname, lastname, username, email, phone_number, address, password) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$firstname, $lastname, $username, $email, $phone, $address, $hashedPassword]);
 
     $_SESSION['success'] = "Account created successfully! You can now log in and start using your account.";
     header("Location: login.php");

@@ -12,7 +12,7 @@ $stmt = $pdo->prepare("SELECT * FROM cakes");
 $stmt->execute();
 $cakes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-if(isset($_COOKIE['token'])){
+if (isset($_COOKIE['token'])) {
     $token = $_COOKIE['token'];
     $decoded = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
 }
@@ -47,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../assets/icon/Circle_Logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../styles/home.css">
     <link rel="stylesheet" href="../styles/styles.css">
     <title>Hanzo's Cakery</title>
@@ -60,13 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <h1>Hanzo's Cakery</h1>
             </div>
             <div class="nav-content">
-                <form class="search-container" method="GET">
-                    <input type="text" placeholder="Search for cakes...">
-                    <a href="#">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM2NjY2NjYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1zZWFyY2giPjxjaXJjbGUgY3g9IjExIiBjeT0iMTEiIHI9IjgiLz48cGF0aCBkPSJtMjEgMjEtNC4zNS00LjM1Ii8+PC9zdmc+"
-                            alt="Search">
-                    </a>
-                </form>
                 <?php if (!isset($_COOKIE['token'])): ?>
                     <div class="auth-button">
                         <li>
@@ -83,6 +77,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php else: ?>
                     <nav class='navlink'>
                         <ul>
+                            <?php if ($decoded->data->role === 'admin'): ?>
+                                <li id="user">
+                                    <a href="../admin/dashboard.php">
+                                        <i class="fa-solid fa-user-gear" style="color: white"></i>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
                             <li>
                                 <a href="cart.php" aria-label="Shopping Cart">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -94,12 +95,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </a>
                             </li>
                             <li id="user">
-                                <a href="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <path
-                                            d="M16.043,14H7.957A4.963,4.963,0,0,0,3,18.957V24H21V18.957A4.963,4.963,0,0,0,16.043,14Z" />
-                                        <circle cx="12" cy="6" r="6" />
-                                    </svg>
+                                <a href="my-orders.php">
+                                    <i class="fa-solid fa-bag-shopping" style="color: white"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../auth/logout.php" aria-label="Logout">
+                                    <i class="fa fa-sign-out" aria-hidden="true" style="color: white"></i>
                                 </a>
                             </li>
                         </ul>
@@ -146,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     foreach ($cakes as $cake) {
                         if ($cake['cake_type'] === $category && !in_array($cake, $displayedCakes)) {
                             $displayedCakes[] = $cake;
-                ?>
+                            ?>
                             <div class="card">
                                 <div class="card-image">
                                     <img src="../assets/cakes/<?= $cake['image_path'] ?>" alt="<?= $cake['cake_name'] ?>">
@@ -167,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </form>
                                 </div>
                             </div>
-                <?php
+                            <?php
                             break; // Stop after finding one cake for the category
                         }
                     }
@@ -268,7 +270,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php endforeach; ?>
             </div>
         </div>
-        
+
     </main>
 </body>
 

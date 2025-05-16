@@ -35,6 +35,15 @@ WHERE
 ");
 $stmt->execute([$user_id]);
 $cakes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$total = 0;
+foreach ($cakes as $cake) {
+    $total += $cake['cake_price'] * $cake['quantity'];
+}
+
+$deliveryFee = 60;
+$total += $deliveryFee;
+$_SESSION['amount'] = $total;
 ?>
 
 <!DOCTYPE html>
@@ -105,14 +114,8 @@ $cakes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </div>
                 <div class="invoice">
                     <div class="invoice-card">
-                        <h3>Total:
-                            <?php
-                            $total = 0;
-                            foreach ($cakes as $cake) {
-                                $total += $cake['cake_price'] * $cake['quantity'];
-                            }
-                            echo '₱ ' . number_format($total, 2);
-                            ?>
+                        <h3>Total: ₱
+                            <?= number_format($total, 2) ?>
                         </h3>
                         <button form="form2" style="cursor: pointer">Place Order <i class="fa-solid fa-arrow-right"
                                 style="font-size: 1rem;"></i> </button>
@@ -120,17 +123,22 @@ $cakes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </div>
                 <div class="details">
                     <div class="detail-container">
-                        <h2>Contact Details</h2>
+                        <h2>Order Details</h2>
                         <div class="detail-group">
                             <div class="left">
-                                <p class="label">Phone Number:</p>
-                                <p class="label">Name:</p>
-                                <p class="label">Email:</p>
+                                <p class="label">Order: </p>
+                                <br>
+                                <p class="label">Delivery Fee: </p>
                             </div>
                             <div class="right">
-                                <p><?= $cakes[0]['phone_number'] ?></p>
-                                <p><?= $cakes[0]['firstname'] . ' ' . $cakes[0]['lastname'] ?></p>
-                                <p><?= $cakes[0]['email'] ?></p>
+                                <p>
+                                    <?php foreach ($cakes as $c): ?>
+                                        <?= htmlspecialchars($c['cake_name'] . ' x ' . $c['quantity']) ?>
+                                        <br>
+                                    <?php endforeach; ?>
+                                </p>
+                                <br>
+                                <p>₱ <?= number_format($deliveryFee, 2) ?></p>
                             </div>
                         </div>
                         <div class="payment-method">

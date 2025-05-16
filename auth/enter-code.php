@@ -1,10 +1,31 @@
 <?php
 session_start();
 
-if (isset($_COOKIE['token'])) {
-    header("Location: ../home/home.php");
+require '../includes/db.php';
+require '../utils/phpmailer.php';
+
+if (!isset($_SESSION['code'])) {
+    header("Location: forgot-password.php");
     exit();
 }
+
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
+    $code = $_POST['code'];
+    $code = (int) $code;
+
+    if ($code === $_SESSION['code']) {
+        $_SESSION['success'] = "Code correct";
+
+        header("Location: new-password.php");
+        unset($_SESSION['code']);
+        exit();
+    }
+
+    $_SESSION['error'] = "Code incorrect";
+    header("Location: enter-code.php");
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +37,7 @@ if (isset($_COOKIE['token'])) {
     <link rel="icon" href="../assets/Logo.png">
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="../styles/auth.css">
-    <title>Hanzo Cakery | Login</title>
+    <title>Hanzo Cakery | Forgot Password</title>
 </head>
 
 <body>
@@ -25,8 +46,8 @@ if (isset($_COOKIE['token'])) {
             <div class="logo">
                 <img src="../assets/icon/Logo.svg" alt="">
             </div>
-            <h1>Log in</h1>
-            <p>Log in to place your next delicious order</p>
+            <h1>Enter code</h1>
+            <p class="subheading">We've sent a code to your email.</p>
             <?php if (isset($_SESSION['success'])): ?>
                 <div class="message-success">
                     <p class="success"><?= $_SESSION['success'] ?></p>
@@ -39,13 +60,10 @@ if (isset($_COOKIE['token'])) {
                     <?php unset($_SESSION['error']) ?>
                 </div>
             <?php endif; ?>
-            <form action="login_validate.php" method="POST">
-                <input type="text" placeholder="Username" name="username">
-                <input type="password" placeholder="Password" name="password">
-                <a href="forgot-password.php" style="text-align: right;">Forgot password?</a>
-                <button>Log in</button>
+            <form action="" method="POST">
+                <input type="number" placeholder="Enter the code" name="code" required>
+                <button type="submit">Enter code</button>
             </form>
-            <p>Don't have an account yet? <a href="signup.php">Sign up</a></p>
         </div>
     </div>
 </body>

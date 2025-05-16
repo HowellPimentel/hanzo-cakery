@@ -33,14 +33,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    if (strlen($account_number) !== 10) {
-        $_SESSION['error'] = "Account number must be 10 digits";
+    if (strlen($account_number) < 10) {
+        $_SESSION['error'] = "Account number must be at least 10 digits";
         header("Location: cart.php");
         exit();
     }
 
-    $stmt = $pdo->prepare("INSERT INTO payment(payment_method, account_name, account_number) VALUES (?, ?, ?)");
-    $stmt->execute([$_SESSION['payment_method'], $account_name, $account_number]);
+    $stmt = $pdo->prepare("INSERT INTO payment(payment_method, account_name, account_number, amount) VALUES (?, ?, ?, ?)");
+    $stmt->execute([$_SESSION['payment_method'], $account_name, $account_number, $_SESSION['amount']]);
 
     $payment_id = $pdo->lastInsertId();
 
@@ -49,14 +49,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($cart_items as $item) {
-        $stmt = $pdo->prepare("INSERT INTO orders(user_id, cake_id, transaction_id, payment_id) VALUES (?, ?, ?, ?)");
-        $stmt->execute([$user_id, $item['cake_id'], $transaction_id, $payment_id]);
+        $stmt = $pdo->prepare("INSERT INTO orders(user_id, cake_id, transaction_id, payment_id, quantity) VALUES (?, ?, ?, ?, ?)");
+        $stmt->execute([$user_id, $item['cake_id'], $transaction_id, $payment_id, $item['quantity']]);
 
         $order_id = $pdo->lastInsertId();
 
         $stmt = $pdo->prepare("DELETE FROM cart WHERE cake_id = ? AND user_id = ?");
         $stmt->execute([$item['cake_id'], $user_id]);
     }
+
+    unset($_SESSION['amount']);
 
     header("Location: invoice.php");
     exit();

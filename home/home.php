@@ -12,7 +12,7 @@ $stmt = $pdo->prepare("SELECT * FROM cakes");
 $stmt->execute();
 $cakes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-if(isset($_COOKIE['token'])){
+if (isset($_COOKIE['token'])) {
     $token = $_COOKIE['token'];
     $decoded = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
 }
@@ -61,13 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <h1>Hanzo's Cakery</h1>
             </div>
             <div class="nav-content">
-                <form class="search-container" method="GET">
-                    <input type="text" placeholder="Search for cakes...">
-                    <a href="#">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM2NjY2NjYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1zZWFyY2giPjxjaXJjbGUgY3g9IjExIiBjeT0iMTEiIHI9IjgiLz48cGF0aCBkPSJtMjEgMjEtNC4zNS00LjM1Ii8+PC9zdmc+"
-                            alt="Search">
-                    </a>
-                </form>
                 <?php if (!isset($_COOKIE['token'])): ?>
                     <div class="auth-button">
                         <li>
@@ -84,6 +77,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php else: ?>
                     <nav class='navlink'>
                         <ul>
+                            <?php if ($decoded->data->role === 'admin'): ?>
+                                <li id="user">
+                                    <a href="../admin/dashboard.php">
+                                        <i class="fa-solid fa-user-gear" style="color: white"></i>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
                             <li>
                                 <a href="cart.php" aria-label="Shopping Cart">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -95,12 +95,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </a>
                             </li>
                             <li id="user">
-                                <a href="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <path
-                                            d="M16.043,14H7.957A4.963,4.963,0,0,0,3,18.957V24H21V18.957A4.963,4.963,0,0,0,16.043,14Z" />
-                                        <circle cx="12" cy="6" r="6" />
-                                    </svg>
+                                <a href="my-orders.php">
+                                    <i class="fa-solid fa-bag-shopping" style="color: white"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../auth/logout.php" aria-label="Logout">
+                                    <i class="fa fa-sign-out" aria-hidden="true" style="color: white"></i>
                                 </a>
                             </li>
                         </ul>
@@ -160,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     foreach ($cakes as $cake) {
                         if ($cake['cake_type'] === $category && !in_array($cake, $displayedCakes)) {
                             $displayedCakes[] = $cake;
-                ?>
+                            ?>
                             <div class="card">
                                 <div class="card-image">
                                     <img src="../assets/cakes/<?= $cake['image_path'] ?>" alt="<?= $cake['cake_name'] ?>">
@@ -181,7 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </form>
                                 </div>
                             </div>
-                <?php
+                            <?php
                             break; // Stop after finding one cake for the category
                         }
                     }
@@ -192,11 +193,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <section class="map-section">
             <div class="container">
                 <div class="map-container">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d493.68410964213484!2d125.12965904982917!3d8.155018769891907!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32ffab5160410f33%3A0xd56d32abee17670c!2sHanzo&#39;s%20cakery!5e0!3m2!1sen!2sph!4v1746951881893!5m2!1sen!2sph" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d493.68410964213484!2d125.12965904982917!3d8.155018769891907!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32ffab5160410f33%3A0xd56d32abee17670c!2sHanzo&#39;s%20cakery!5e0!3m2!1sen!2sph!4v1746951881893!5m2!1sen!2sph"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
                 <div style="text-align: center;">
                     <h1 style="color: var(--primary); margin-top: 1rem;">Hanzo's Cakery</h1>
-                    <p style="text-transform: capitalize;">murillo street, corner mampaalong street, Malaybalay, Philippines</p>
+                    <p style="text-transform: capitalize;">murillo street, corner mampaalong street, Malaybalay,
+                        Philippines</p>
                 </div>
             </div>
         </section>

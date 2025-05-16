@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require '../includes/db.php';
 require '../utils/jwt.php';
 
@@ -17,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user && password_verify($password, $user['password'])) {
-        $token = jwt_token($user['id'], $user['firstname'], $user['lastname']);
+        $token = jwt_token($user['id'], $user['firstname'], $user['lastname'], $user['role']);
         setcookie("token", $token, time() + 3600, "/", "", true, true);
 
         header("Location: ../home/home.php");

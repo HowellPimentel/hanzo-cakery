@@ -48,6 +48,7 @@ if (isset($_COOKIE['token'])) {
                 <input type="text" placeholder="Username" name="username">
                 <input type="email" placeholder="Email" name="email">
                 <input type="number" placeholder="Phone Number" name="phone_number">
+                <input type="text" placeholder="Delivery Address" name="address">
                 <input type="password" placeholder="Password" name="password">
                 <input type="password" placeholder="Confirm Password" name="confirm_password">
                 <button>Sign up</button>

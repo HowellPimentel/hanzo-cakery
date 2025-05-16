@@ -110,7 +110,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             <p>Your order number is: <span class="order-number"><?= $_SESSION['transaction_id'] ?></span></p>
         </div>
         <div class="info">
-            <p>You will be notified once your order is ready for pick up.</p>
+            <p>Your order will be delivered to your address: <?= htmlspecialchars($user['address']) ?></p>
             <p>If you have any questions, please contact us at <a
                     href="mailto:support@hanzocakery.com">hanzoscakery@gmail.com</a>.</p>
         </div>
