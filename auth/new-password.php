@@ -22,6 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     $stmt = $pdo->prepare("UPDATE users SET password = ? WHERE email = ?");
     $stmt->execute([$hash, $_SESSION['reset_email']]);
+
+    $_SESSION['success'] = 'Successfully changed password';
+    header("Location: login.php");
+    exit();
 }
 
 ?>

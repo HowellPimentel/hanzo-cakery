@@ -1,45 +1,51 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    background: #529FBD29;
-    height: 100dvh;
-    width: 100%;
+  font-family: "Inter", sans-serif;
+  background: #529fbd29;
+  height: 100dvh;
+  width: 100%;
 }
 
 .message-success {
-    border: 1px solid #00D621;
-    color: #00D621;
-    padding: 0.25rem 1rem;
-    margin-bottom: 1rem;
-    border-radius: 0.5rem;
-    background: hsl(150, 100%, 95%);
-    display: flex;
+  border: 1px solid #00d621;
+  color: #00d621;
+  padding: 0.25rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  background: hsl(150, 100%, 95%);
+  display: flex;
 }
 
 .message-error {
-    border: 1px solid #FF6961;
-    color: #FF6961;
-    padding: 0.5rem 1rem;
-    margin-bottom: 1rem;
-    border-radius: 0.5rem;
-    background: hsl(0, 100%, 95%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  border: 1px solid #ff6961;
+  color: #ff6961;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  background: hsl(0, 100%, 95%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .message-success .success,
 .message-error .error {
-    font-size: 0.75rem;
-    font-weight: bold;
-    text-align: center;
-    margin: auto;
-    margin-bottom: 0 !important;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 0 !important;
 }

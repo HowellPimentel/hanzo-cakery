@@ -1,5 +1,9 @@
 <?php
 session_start();
+
+require '../utils/load_env.php';
+
+$site_key = $_ENV['RECAPTCHA_SITE'];
 if (isset($_COOKIE['token'])) {
     header("Location: ../home/home.php");
     exit();
@@ -15,6 +19,7 @@ if (isset($_COOKIE['token'])) {
     <link rel="icon" href="../assets/Logo.png">
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="../styles/auth.css">
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <title>Hanzo Cakery | Login</title>
 </head>
 
@@ -51,6 +56,7 @@ if (isset($_COOKIE['token'])) {
                 <input type="text" placeholder="Delivery Address" name="address">
                 <input type="password" placeholder="Password" name="password">
                 <input type="password" placeholder="Confirm Password" name="confirm_password">
+                <div style="margin-bottom: 12px;" class="g-recaptcha" data-sitekey="<?= $site_key ?>"></div>
                 <button>Sign up</button>
             </form>
             <p>Already have an account? <a href="login.php">Log in</a></p>

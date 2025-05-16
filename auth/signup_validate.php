@@ -17,16 +17,79 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = $_POST['phone_number'];
     $address = $_POST['address'];
     $password = $_POST['password'];
-    $confirm = $_POST['confirm_password'];
+    $confirm_password = $_POST['confirm_password'];
 
-    if (empty($firstname) || empty($lastname) || empty($username) || empty($email) || empty($phone) || empty($address) || empty($password)) {
-        $_SESSION['error'] = "All fields are required";
+    $recaptchaSecret = $_ENV['RECAPTCHA_SECRET'];
+    $recaptchaResponse = $_POST['g-recaptcha-response'];
+
+    $verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$recaptchaSecret}&response={$recaptchaResponse}");
+    $captchaSuccess = json_decode($verify);
+
+    if (!$captchaSuccess->success) {
+        $_SESSION['error'] = 'Recaptcha Verification Failed';
+        header('Location: signup.php');
+        exit();
+    }
+
+    // Validate inputs
+    if (empty($firstname)) {
+        $_SESSION['error'] = "First name is required";
+        header("Location: signup.php");
+        exit();
+    }
+    if (empty($lastname)) {
+        $_SESSION['error'] = "Last name is required";
+        header("Location: signup.php");
+        exit();
+    }
+    if (empty($username)) {
+        $_SESSION['error'] = "Username is required";
+        header("Location: signup.php");
+        exit();
+    }
+    if (empty($email)) {
+        $_SESSION['error'] = "Email is required";
+        header("Location: signup.php");
+        exit();
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['error'] = "Invalid email format";
+        header("Location: signup.php");
+        exit();
+    }
+    if (empty($phone)) {
+        $_SESSION['error'] = "Phone number is required";
+        header("Location: signup.php");
+        exit();
+    }
+    if (empty($address)) {
+        $_SESSION['error'] = "Address is required";
+        header("Location: signup.php");
+        exit();
+    }
+    if (empty($password)) {
+        $_SESSION['error'] = "Password is required";
+        header("Location: signup.php");
+        exit();
+    } elseif (strlen($password) < 8) {
+        $_SESSION['error'] = "Password must be at least 8 characters long";
+        header("Location: signup.php");
+        exit();
+    } elseif (!preg_match("/[A-Z]/", $password)) {
+        $_SESSION['error'] = "Password must contain at least one uppercase letter";
+        header("Location: signup.php");
+        exit();
+    } elseif (!preg_match("/[a-z]/", $password)) {
+        $_SESSION['error'] = "Password must contain at least one lowercase letter";
         header("Location: signup.php");
         exit();
     }
 
-    if ($password !== $confirm) {
-        $_SESSION['error'] = "Passwords don't match! Please check and try again.";
+    if (empty($confirm_password)) {
+        $_SESSION['error'] = "Please confirm your password";
+        header("Location: signup.php");
+        exit();
+    } elseif ($password !== $confirm_password) {
+        $_SESSION['error'] = "Passwords do not match";
         header("Location: signup.php");
         exit();
     }
