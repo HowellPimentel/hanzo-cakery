@@ -51,6 +51,53 @@ Hanzo Cakery is a comprehensive bakery management system that provides features 
 - Order status tracking
 - Customer feedback system
 
+## Directory Structure
+
+- `/admin` - Administrator interface and functionality
+- `/auth` - Authentication related files
+- `/home` - Customer-facing pages
+- `/assets` - Static assets (images, etc.)
+- `/includes` - Common PHP includes
+- `/styles` - CSS stylesheets
+- `/utils` - Utility functions
+- `/vendor` - Composer dependencies
+
+## Sample .env File
+
+Create a `.env` file in the root directory with the following configuration:
+
+```env
+# Database Configuration
+DB_SERVERNAME=localhost
+DB_USERNAME=root
+DB_PASSWORD=
+DB_NAME=cakery
+
+# JWT Configuration
+JWT_SECRET=your_secure_jwt_secret_key_here
+
+# Application Configuration
+APP_PASSWORD=your_app_specific_password
+APP_EMAIL=your_email@gmail.com
+APP_NAME=Hanzo Cakery
+
+# reCAPTCHA Configuration
+RECAPTCHA_SITE=your_recaptcha_site_key
+RECAPTCHA_SECRET=your_recaptcha_secret_key
+
+# Google Configuration
+GOOGLE_CLIENT=your_google_client_id
+GOOGLE_SECRET=your_google_client_secret
+GOOGLE_REDIRECT=http://localhost/hanzo-cakery/auth/google-callback.php
+```
+
+Note:
+
+- Replace the placeholder values with your actual configuration
+- Keep your JWT_SECRET secure and unique
+- For Google integration, obtain credentials from Google Cloud Console
+- For reCAPTCHA, get your keys from Google reCAPTCHA admin console
+
 ## Tech Stack
 
 - **Backend**: PHP
@@ -130,49 +177,19 @@ The project uses the following main packages:
    - Open your web browser and navigate to the configured URL
    - The system will redirect to the home page
 
-## Sample .env File
+## Screenshots
 
-Create a `.env` file in the root directory with the following configuration:
+![Home Page](./screenshots/home.png)
+_Home page with featured products and categories_
 
-```env
-# Database Configuration
-DB_SERVERNAME=localhost
-DB_USERNAME=root
-DB_PASSWORD=
-DB_NAME=cakery
+![Shopping Cart](./screenshots/cart.png)
+_Shopping cart with order summary_
 
-# JWT Configuration
-JWT_SECRET=your_secure_jwt_secret_key_here
+![Orders](./screenshots/orders.png)
+_Order management and tracking_
 
-# Application Configuration
-APP_PASSWORD=your_app_specific_password
-APP_EMAIL=your_email@gmail.com
-APP_NAME=Hanzo Cakery
+![Login](./screenshots/login.png)
+_User authentication page_
 
-# reCAPTCHA Configuration
-RECAPTCHA_SITE=your_recaptcha_site_key
-RECAPTCHA_SECRET=your_recaptcha_secret_key
-
-# Google Configuration
-GOOGLE_CLIENT=your_google_client_id
-GOOGLE_SECRET=your_google_client_secret
-GOOGLE_REDIRECT=http://localhost/hanzo-cakery/auth/google-callback.php
-```
-
-Note:
-
-- Replace the placeholder values with your actual configuration
-- Keep your JWT_SECRET secure and unique
-- For Google integration, obtain credentials from Google Cloud Console
-- For reCAPTCHA, get your keys from Google reCAPTCHA admin console
-
-## Directory Structure
-
-- `/admin` - Administrator interface and functionality
-- `/auth` - Authentication related files
-- `/home` - Customer-facing pages
-- `/assets` - Static assets (images, etc.)
-- `/includes` - Common PHP includes
-- `/styles` - CSS stylesheets
-- `/utils` - Utility functions
-- `/vendor` - Composer dependencies
+![Confirmation](./screenshots/confirmation.png)
+_Order confirmation page_
