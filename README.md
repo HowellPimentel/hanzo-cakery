@@ -1,88 +1,188 @@
-# Hanzo's Cakery - eCommerce App
+# Hanzo Cakery
 
-Welcome to **Hanzo's Cakery**, an online platform where you can browse, order, and customize cakes from the finest bakery in town! This app allows users to place cake orders, explore a variety of baked goods, and enjoy a seamless shopping experience. 
+A web-based bakery management system that helps manage orders, inventory, and customer information for Hanzo Cakery.
 
-## Technology Stack
+## Description
 
-- **PHP**: Server-side scripting language to manage business logic and data processing.
-- **MySQL**: Database to store user information, orders, products, and more.
-- **HTML, CSS, JavaScript**: Front-end technologies to ensure a smooth and interactive user experience.
-- **AJAX**: For smooth asynchronous interactions between the client and server.
-- **Apache**: Web server for hosting the application.
+Hanzo Cakery is a comprehensive bakery management system that provides features for both customers and administrators. The system allows customers to browse products, place orders, and track their order status, while administrators can manage inventory, process orders, and handle customer information.
+
+## Key Features
+
+### Customer Features
+
+- User registration and authentication with email verification
+- Browse and search products with filters
+- Shopping cart functionality
+- Secure checkout process
+- Order tracking and history
+- Profile management
+- Password reset functionality
+- Social media login (Google)
+
+### Admin Features
+
+- Secure admin dashboard
+- Product management (add, edit, delete)
+- Inventory tracking
+- Order management and processing
+- Customer database management
+- Sales reports and analytics
+- Email notifications for new orders
+- Bulk product updates
+
+### Security Features
+
+- JWT-based authentication
+- reCAPTCHA integration for forms
+- Secure password hashing
+- Protected admin routes
+- Input validation and sanitization
+- XSS and CSRF protection
+- Secure session management
+
+### Additional Features
+
+- Responsive design for all devices
+- Real-time inventory updates
+- Email notifications system
+- Google integration for authentication
+- Search functionality with filters
+- Image upload and management
+- Order status tracking
+- Customer feedback system
+
+## Tech Stack
+
+- **Backend**: PHP
+- **Database**: MySQL
+- **Frontend**: HTML, CSS, JavaScript
+- **Authentication**: JWT (JSON Web Tokens)
+- **Email**: PHPMailer
+- **Environment Variables**: PHP dotenv
+- **Google Integration**: Google API Client
 
 ## Features
 
-- **Product Catalog**: View a wide range of cakes and baked goods.
-- **Customizable Orders**: Personalize your cake orders with different sizes, flavors, and toppings.
-- **Shopping Cart**: Add items to your cart, edit quantities, or remove items before checkout.
-- **Secure Checkout**: Payment integration for safe online transactions.
-- **Order History**: Track your past orders and easily reorder your favorites.
-- **Admin Dashboard**: For managing products, orders, and customer information.
-  
+- User authentication and authorization
+- Product catalog management
+- Order processing and tracking
+- Inventory management
+- Customer management
+- Email notifications
+- Google integration
+
+## API Routes
+
+### Authentication
+
+- `/auth/login.php` - User login
+- `/auth/register.php` - User registration
+- `/auth/logout.php` - User logout
+
+### Home
+
+- `/home/home.php` - Main landing page
+- `/home/products.php` - Product catalog
+- `/home/orders.php` - Order management
+
+### Admin
+
+- `/admin/dashboard.php` - Admin dashboard
+- `/admin/inventory.php` - Inventory management
+- `/admin/customers.php` - Customer management
+
+## Dependencies
+
+The project uses the following main packages:
+
+- `vlucas/phpdotenv` (^5.6) - Environment variable management
+- `firebase/php-jwt` (^6.11) - JWT authentication
+- `phpmailer/phpmailer` (^6.10) - Email functionality
+- `google/apiclient` (^2.18) - Google API integration
+
 ## Installation
-
-### Prerequisites
-
-- PHP (>= 7.4)
-- MySQL or MariaDB
-- Apache server (or any compatible server)
-- Composer (for dependency management)
-  
-### Steps to Set Up Locally
 
 1. Clone the repository:
 
-    ```bash
-    git clone https://github.com/yourusername/hanzos-cakery.git
-    cd hanzos-cakery
-    ```
+   ```bash
+   git clone [repository-url]
+   cd hanzo-cakery
+   ```
 
 2. Install dependencies using Composer:
 
-    ```bash
-    composer install
-    ```
+   ```bash
+   composer install
+   ```
 
-3. Set up the MySQL database by creating a new database, for example:
+3. Set up the database:
 
-    ```sql
-    CREATE DATABASE hanzos_cakery;
-    ```
+   - Import the `cakery.sql` file into your MySQL database
+   - Create a `.env` file in the root directory with the following variables:
+     ```
+     DB_HOST=your_database_host
+     DB_NAME=your_database_name
+     DB_USER=your_database_user
+     DB_PASS=your_database_password
+     JWT_SECRET=your_jwt_secret
+     SMTP_HOST=your_smtp_host
+     SMTP_USER=your_smtp_username
+     SMTP_PASS=your_smtp_password
+     ```
 
-4. Import the provided `database.sql` file to set up the initial tables:
+4. Configure your web server:
 
-    ```bash
-    mysql -u username -p hanzos_cakery < database.sql
-    ```
+   - Point your web server to the project's root directory
+   - Ensure PHP has write permissions for necessary directories
+   - Enable required PHP extensions (mysqli, json, etc.)
 
-5. Configure your database settings in `config.php`:
+5. Access the application:
+   - Open your web browser and navigate to the configured URL
+   - The system will redirect to the home page
 
-    ```php
-    define('DB_SERVER', 'localhost');
-    define('DB_USERNAME', 'root');
-    define('DB_PASSWORD', 'your_password');
-    define('DB_NAME', 'hanzos_cakery');
-    ```
+## Sample .env File
 
-6. Start the Apache server and navigate to `http://localhost` to access the app.
+Create a `.env` file in the root directory with the following configuration:
 
-## Usage
+```env
+# Database Configuration
+DB_SERVERNAME=localhost
+DB_USERNAME=root
+DB_PASSWORD=
+DB_NAME=hanzo_cakery
 
-- **For Customers**: Browse products, add items to your cart, customize cakes, and complete your order.
-- **For Admin**: Log in to the admin panel to manage products, view customer orders, and manage stock.
+# JWT Configuration
+JWT_SECRET=your_secure_jwt_secret_key_here
 
-## Contributing
+# Application Configuration
+APP_PASSWORD=your_app_specific_password
+APP_EMAIL=your_email@gmail.com
+APP_NAME=Hanzo Cakery
 
-1. Fork the repository.
-2. Create your feature branch (`git checkout -b feature/feature-name`).
-3. Commit your changes (`git commit -am 'Add new feature'`).
-4. Push to the branch (`git push origin feature/feature-name`).
-5. Open a pull request.
+# reCAPTCHA Configuration
+RECAPTCHA_SITE=your_recaptcha_site_key
+RECAPTCHA_SECRET=your_recaptcha_secret_key
 
-## License
+# Google Configuration
+GOOGLE_CLIENT=your_google_client_id
+GOOGLE_SECRET=your_google_client_secret
+GOOGLE_REDIRECT=http://localhost/hanzo-cakery/auth/google-callback.php
+```
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Note:
 
-## Contact
+- Replace the placeholder values with your actual configuration
+- Keep your JWT_SECRET secure and unique
+- For Google integration, obtain credentials from Google Cloud Console
+- For reCAPTCHA, get your keys from Google reCAPTCHA admin console
 
-For any inquiries or issues, please contact us at [support@hanzoscakery.com](mailto:support@hanzoscakery.com).
+## Directory Structure
+
+- `/admin` - Administrator interface and functionality
+- `/auth` - Authentication related files
+- `/home` - Customer-facing pages
+- `/assets` - Static assets (images, etc.)
+- `/includes` - Common PHP includes
+- `/styles` - CSS stylesheets
+- `/utils` - Utility functions
+- `/vendor` - Composer dependencies
