@@ -118,17 +118,7 @@ The project uses the following main packages:
 3. Set up the database:
 
    - Import the `cakery.sql` file into your MySQL database
-   - Create a `.env` file in the root directory with the following variables:
-     ```
-     DB_HOST=your_database_host
-     DB_NAME=your_database_name
-     DB_USER=your_database_user
-     DB_PASS=your_database_password
-     JWT_SECRET=your_jwt_secret
-     SMTP_HOST=your_smtp_host
-     SMTP_USER=your_smtp_username
-     SMTP_PASS=your_smtp_password
-     ```
+   - Open `localhost/phpmyadmin`, create a database and named it cakery
 
 4. Configure your web server:
 
@@ -149,7 +139,7 @@ Create a `.env` file in the root directory with the following configuration:
 DB_SERVERNAME=localhost
 DB_USERNAME=root
 DB_PASSWORD=
-DB_NAME=hanzo_cakery
+DB_NAME=cakery
 
 # JWT Configuration
 JWT_SECRET=your_secure_jwt_secret_key_here
